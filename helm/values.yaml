@@ -1,0 +1,14 @@
+backend:
+  replicas: 3
+  image: test-api
+  tag: latest
+  env:
+    DB_HOST: mysql
+    DB_PORT: 3306
+    DB_NAME: product_test
+    DB_USER: root
+    DB_PASSWORD: root
+frontend:
+  replicas: 3
+  image: react-frontend
+  tag: 1.0.0

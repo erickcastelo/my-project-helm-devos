@@ -1,0 +1,6 @@
+| Tipo              | Uso principal                                                              |
+| ----------------- | -------------------------------------------------------------------------- |
+| **Deployment**    | Aplicações **sem estado** (frontend, APIs REST, etc.)                      |
+| **StatefulSet**   | Aplicações **com estado** (bancos de dados, caches, sistemas distribuídos) |
+| **DaemonSet**     | Um pod por nó (para logs, monitoramento, etc.)                             |
+| **Job / CronJob** | Tarefas pontuais ou agendadas                                              |

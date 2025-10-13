@@ -1,0 +1,4 @@
+apiVersion: v1
+name: test-frontend
+version: 1.0.0
+description: This about one test deploy
