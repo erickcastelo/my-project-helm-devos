@@ -9,6 +9,9 @@ type Product = {
 const App = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
+  // fetch("http://backend-service.default.svc.cluster.local:3000/products")
+  // <service-name>.<namespace>.svc.cluster.local
+
   useEffect(() => {
     fetch("http://localhost:3000/products")
       .then((res) => res.json())
