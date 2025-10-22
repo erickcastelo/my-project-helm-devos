@@ -19,7 +19,7 @@ spec:
           image: {{ .Values.backend.image }}:{{ .Values.backend.tag }}
           imagePullPolicy: Never #O que faz: nunca tenta puxar, força usar a imagem local (só usei pra teste, nao usar em produção).
           ports:
-            - containerPort: 3000
+            - containerPort: 80
           envFrom:
             - configMapRef:
                 name: config-map
