@@ -9,13 +9,12 @@ metadata:
     app.kubernetes.io/component: frontend
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
     - host: {{ .Values.ingress.host }}
       http:
         paths:
-          - path: /bahahah
+          - path: /app/
             pathType: Prefix
             backend:
               service:
