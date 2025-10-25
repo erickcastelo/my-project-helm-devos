@@ -3,7 +3,7 @@ backend:
   image: app-backend
   tag: 1.0.0
   env:
-    DB_HOST: 172.27.218.4
+    DB_HOST: 10.0.2.15
     DB_PORT: 3306
     DB_NAME: product_test
     DB_USER: root
@@ -12,7 +12,7 @@ frontend:
   replicas: 3
   image: 
     name: app-frontend
-    tag: 1.0.3
+    tag: 1.0.5
 ingress:
   enabled: true
   host: meusite.local

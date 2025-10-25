@@ -1,25 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: {{ template "application.fullname" . }}-backend
   labels:
-    app: backend
+    app.kubernetes.io/name: {{ template "application.name" . }}
+    helm.sh/chart: {{ template "application.chart" . }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/version:  {{ .Values.frontend.image.tag | quote }}
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/part-of: {{ template "application.fullname" . }}
 spec:
   replicas: {{ .Values.backend.replicas }}
   selector: 
     matchLabels:
-      app: backend
+      app.kubernetes.io/name: {{ template "application.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: backend
   template:
     metadata:
       labels:
-        app: backend
+        app.kubernetes.io/name: {{ template "application.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: backend
     spec:
       containers:
-        - name: backend
+        - name: {{ template "application.fullname" . }}-backend
           image: {{ .Values.backend.image }}:{{ .Values.backend.tag }}
           imagePullPolicy: Never #O que faz: nunca tenta puxar, força usar a imagem local (só usei pra teste, nao usar em produção).
           ports:
-            - containerPort: 80
+          - name: http-backend
+            containerPort: 80
+            protocol: TCP
           envFrom:
             - configMapRef:
                 name: config-map

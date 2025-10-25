@@ -1,14 +1,23 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend
+  name: {{ template "application.fullname" . }}-backend
   labels:
-    app: backend
+    app.kubernetes.io/name: {{ template "application.name" . }}
+    helm.sh/chart: {{ template "application.chart" . }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/version:  {{ .Values.frontend.image.tag | quote }}
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/part-of: {{ template "application.fullname" . }}
 spec:
   type: ClusterIP
   selector:
-    app: backend
+    app.kubernetes.io/name: {{ template "application.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: backend
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
+  

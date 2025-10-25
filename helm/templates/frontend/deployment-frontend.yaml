@@ -29,4 +29,24 @@ spec:
           image: {{ .Values.frontend.image.name }}:{{ .Values.frontend.image.tag }}
           imagePullPolicy: Never
           ports:
-            - containerPort: 80
+          - name: http-frontend
+            containerPort: 80
+            protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /app/
+              port: http-frontend
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /app/
+              port: http-frontend
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
