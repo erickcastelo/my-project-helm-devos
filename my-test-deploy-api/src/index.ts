@@ -5,30 +5,21 @@ import cors from "cors";
 
 const app = express();
 
-const allowedOrigins = "*";
+app.use(cors({ origin: "*"}));
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // Permite requests sem origin (como Postman, curl)
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      console.warn(`🚫 CORS bloqueado para origem: ${origin}`);
-      return callback(new Error("CORS não permitido"), false);
-    },
-    credentials: true, // Se quiser permitir cookies ou auth headers
-  })
-);
 
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
+const isProduction = process.env.NODE_ENV === 'production';
+const path = isProduction ? '/app/api' : '';
 
-app.use("/products", productsRouter);
+
+
+app.use(`${path}/products`, productsRouter);
+app.get(`${path}/health`, (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);

@@ -21,7 +21,7 @@ spec:
                 name: {{ template "application.fullname" . }}-frontend
                 port:
                   number: 80
-          - path: /api
+          - path: /app/api
             pathType: Prefix
             backend:
               service:

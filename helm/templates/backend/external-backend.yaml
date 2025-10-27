@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-mysql
+spec:
+  type: ExternalName
+  externalName: 192.168.0.21.nip.io #troque pq externaName só funciona com dns
+  ports:
+    - port: {{ .Values.backend.env.DB_PORT }}
+      targetPort: {{ .Values.backend.env.DB_PORT }}
+      protocol: TCP
+# external-mysql.application.svc.cluster.local

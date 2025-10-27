@@ -13,7 +13,7 @@ const App = () => {
   // <service-name>.<namespace>.svc.cluster.local
 
   useEffect(() => {
-    fetch("http://localhost:3000/products")
+    fetch("http://meusite.local/app/api/products")
       .then((res) => res.json())
       .then(setProducts)
       .catch(console.error);

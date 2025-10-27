@@ -1,19 +1,18 @@
 backend:
   replicas: 3
   image: app-backend
-  tag: 1.0.0
+  tag: 1.0.1
   env:
-    DB_HOST: 10.0.2.15
+    DB_HOST: external-mysql
     DB_PORT: 3306
     DB_NAME: product_test
     DB_USER: root
     DB_PASSWORD: root
 frontend:
   replicas: 3
-  image: 
+  image:
     name: app-frontend
-    tag: 1.0.5
+    tag: 1.0.1
 ingress:
   enabled: true
   host: meusite.local
-

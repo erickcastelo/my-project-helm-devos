@@ -35,3 +35,21 @@ spec:
           envFrom:
             - configMapRef:
                 name: config-map
+          livenessProbe:
+            httpGet:
+              path: /app/api/products
+              port: http-backend
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /app/api/products
+              port: http-backend
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
